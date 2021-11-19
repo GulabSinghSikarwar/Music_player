@@ -16,23 +16,6 @@ rootpath = "D:\\cr"
 pattern = "*.mp3"
 mixer.init()
 
-#  now Lets create the menu for adding song
-my_Menu= tk.Menu(canvas)
-canvas.config(menu=my_Menu)
-# add Songs to menu
-add_Song_Menu= tk.Menu(my_Menu)
-my_Menu.add_cascade(label="Add Songs", menu=add_Song_Menu)
-
-
-def addSong():
-    song=filedialog.askopenfilename(initaldir='D:/cr/' ,title="Chosse Your Song ",filetypes=(("mp3 Files","*.mp3")))
-
-
-    pass
-
-
-add_Song_Menu.add_command(label="Add One SOng to PLayList",command=addSong())
-
 
 
 
