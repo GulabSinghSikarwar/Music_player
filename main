@@ -1,0 +1,106 @@
+import tkinter  as tk
+import fnmatch
+import os
+import pygame
+from tkinter import ACTIVE, filedialog
+
+from pygame import mixer
+
+canvas = tk.Tk()
+canvas.title("Music PLayer")
+canvas.geometry("800x1300")
+canvas.configure(bg="black")
+
+# gives the path for and pattern for the type of file we want to show
+rootpath = "D:\\cr"
+pattern = "*.mp3"
+mixer.init()
+
+#  now Lets create the menu for adding song
+my_Menu= tk.Menu(canvas)
+canvas.config(menu=my_Menu)
+# add Songs to menu
+add_Song_Menu= tk.Menu(my_Menu)
+my_Menu.add_cascade(label="Add Songs", menu=add_Song_Menu)
+
+
+def addSong():
+    song=filedialog.askopenfilename(initaldir='D:/cr/' ,title="Chosse Your Song ",filetypes=(("mp3 Files","*.mp3")))
+
+
+    pass
+
+
+add_Song_Menu.add_command(label="Add One SOng to PLayList",command=addSong())
+
+
+
+
+# Listbox Creation for  Showing the songs in the directory
+
+ListBox = tk.Listbox(canvas, fg="cyan", bg="black", width=100, font=('times new roman ', 14))
+ListBox.pack(padx=15, pady=15)
+
+# first outer loop goes into the given path and second inner loop search for files  with given pattern
+# and then we will add all the files present with the found pattern in the listbox
+
+
+# now lets create the label to show the selected files
+label = tk.Label(canvas, text='PlayBAck', bg='black', fg='yellow', font=('times new roman', 14))
+label.pack(pady=15)
+
+# declaring the images
+prev_img = tk.PhotoImage(file="prev.png")
+
+next_img = tk.PhotoImage(file="next.png")
+
+play_img = tk.PhotoImage(file="play.png")
+
+pause_img = tk.PhotoImage(file="pause.png")
+
+stop_img = tk.PhotoImage(file="stop.png")
+
+# now lets create the function
+#  as Soon as the the  user select the song it should  display the song in the created  labeel
+#  and should plays  it
+
+
+#  Since by default the button apperars in vertical manner so
+#  And we want to show the  all buttons in the horizontal manner
+#  so for that we create the  frame
+
+top = tk.Frame(canvas, bg='black')
+top.pack(padx=10, pady=5, anchor='center')
+
+for root, dirs, files in os.walk(rootpath):
+    for filename in fnmatch.filter(files, pattern):
+        ListBox.insert('end', filename)
+        ListBox.insert('end', filename)
+
+
+def play():
+    song=ListBox.get(ACTIVE)
+    song=f'D:/cr/{song}'
+    label.config(text=song)
+    pygame.mixer.music.load(song)
+    pygame.mixer.music.play(loops=0)
+    pass
+
+
+
+# lets create the button
+prevButton = tk.Button(canvas, text='Previous', image=prev_img, bg='black', borderwidth=0)
+prevButton.pack(pady=15, in_=top, side='left')
+
+stopButton = tk.Button(canvas, text='Stop', image=stop_img, bg='black', borderwidth=0)
+stopButton.pack(pady=15, in_=top, side='left')
+
+playButton = tk.Button(canvas, text='Stop', image=play_img, bg='black', borderwidth=0, command=play())
+playButton.pack(pady=15, in_=top, side='left')
+
+pauseButton = tk.Button(canvas, text='Stop', image=pause_img, bg='black', borderwidth=0)
+pauseButton.pack(pady=15, in_=top, side='left')
+
+nextButton = tk.Button(canvas, text='Stop', image=next_img, bg='black', borderwidth=0)
+nextButton.pack(pady=15, in_=top, side='left')
+canvas.mainloop()
