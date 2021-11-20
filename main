@@ -12,6 +12,7 @@ canvas.geometry("800x1300")
 canvas.configure(bg="black")
 
 # gives the path for and pattern for the type of file we want to show
+# rootPath
 rootpath = "D:\\cr"
 pattern = "*.mp3"
 mixer.init()
