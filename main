@@ -21,15 +21,15 @@ mixer.init()
 
 # Listbox Creation for  Showing the songs in the directory
 
-ListBox = tk.Listbox(canvas, fg="cyan", bg="black", width=100, font=('times new roman ', 14))
-ListBox.pack(padx=15, pady=15)
+ListBox = tk.Listbox(canvas, fg="Black", bg="yellow", width=100, font=('times new roman ', 25))
+ListBox.pack(padx=25, pady=25)
 
 # first outer loop goes into the given path and second inner loop search for files  with given pattern
 # and then we will add all the files present with the found pattern in the listbox
 
 
 # now lets create the label to show the selected files
-label = tk.Label(canvas, text='PlayBAck', bg='black', fg='yellow', font=('times new roman', 14))
+label = tk.Label(canvas, text='PlayBAck', bg='aliceblue', fg='Black', font=('times new roman', 25))
 label.pack(pady=15)
 
 # declaring the images
@@ -52,7 +52,7 @@ stop_img = tk.PhotoImage(file="stop.png")
 #  And we want to show the  all buttons in the horizontal manner
 #  so for that we create the  frame
 
-top = tk.Frame(canvas, bg='black')
+top = tk.Frame(canvas, bg='aliceblue',padx=10)
 top.pack(padx=10, pady=5, anchor='center')
 
 for root, dirs, files in os.walk(rootpath):
