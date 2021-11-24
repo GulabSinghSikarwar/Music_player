@@ -60,7 +60,7 @@ top.pack(padx=10, pady=5, anchor='center')
 for root, dirs, files in os.walk(rootpath):
     for filename in fnmatch.filter(files, pattern):
         ListBox.insert('end', filename)
-        ListBox.insert('end', filename)
+      
 
 
 def play():
@@ -72,20 +72,61 @@ def play():
     pass
 
 
+def stop():
+    pygame.mixer.music.stop()
+    ListBox.select_clear(ACTIVE)
+def nextSong():
+    next_song=ListBox.curselection()
+    # print(next_song)
+    # print(next_song[0])
+    next_song=next_song[0]+1
+    song=ListBox.get(next_song)
+    print(song)
+    song=f'D:/cr/{song}'
+    label.config(text=song)
+    pygame.mixer.music.load(song)
+    pygame.mixer.music.play(loops=0)
+
+    
+
+
+
+    
+    pass
+def prevSong():
+    next_song=ListBox.curselection()
+    # print(next_song)
+    # print(next_song[0])
+    next_song=next_song[0]-1
+    song=ListBox.get(next_song)
+    print(song)
+    song=f'D:/cr/{song}'
+    label.config(text=song)
+    pygame.mixer.music.load(song)
+    pygame.mixer.music.play(loops=0)
+
+    
+
+
+
+    
+    pass
+
+
 
 # lets create the button
-prevButton = tk.Button(canvas, text='Previous', image=prev_img, bg='black', borderwidth=0)
+prevButton = tk.Button(canvas, text='Previous', image=prev_img, bg='black', borderwidth=0 ,command=prevSong)
 prevButton.pack(pady=15, in_=top, side='left')
 
 stopButton = tk.Button(canvas, text='Stop', image=stop_img, bg='black', borderwidth=0)
 stopButton.pack(pady=15, in_=top, side='left')
 
-playButton = tk.Button(canvas, text='Stop', image=play_img, bg='black', borderwidth=0, command=play())
+playButton = tk.Button(canvas, text='Stop', image=play_img, bg='black', borderwidth=0, command=play)
 playButton.pack(pady=15, in_=top, side='left')
 
-pauseButton = tk.Button(canvas, text='Stop', image=pause_img, bg='black', borderwidth=0)
+pauseButton = tk.Button(canvas, text='Stop', image=pause_img, bg='black', borderwidth=0 ,command=stop)
 pauseButton.pack(pady=15, in_=top, side='left')
 
-nextButton = tk.Button(canvas, text='Stop', image=next_img, bg='black', borderwidth=0)
+nextButton = tk.Button(canvas, text='Stop', image=next_img, bg='black', borderwidth=0,command=nextSong)
 nextButton.pack(pady=15, in_=top, side='left')
 canvas.mainloop()
